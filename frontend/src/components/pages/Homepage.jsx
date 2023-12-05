@@ -42,8 +42,9 @@ const Homepage = (props) => {
                 <div className="bg-[#dee2e6] rounded-[10px] mx-[40px] px-[20px] py-[10px]">
                     <p className="font-medium" ref={el}></p>
                 </div>
-                <div className="mt-[20px] px-[40px]">
-                    <div className="">
+                <div className="mt-[20px] px-[40px] w-full flex flex-col justify-center items-center">
+                    <div className="w-[90%] bg-[#0353a4] flex justify-center mt-[30px] rounded-[5px] py-[5px] mb-[20px]"><p className="text-white text-[20px] font-medium">Electronics</p></div>
+                    <div className="flex items-center space-x-8 justify-center">
                         {
                             Products.map((product, index) => {
                                 if(product.type === "electronics"){
@@ -52,7 +53,9 @@ const Homepage = (props) => {
                             })
                         }
                     </div>
-                    <div className="">
+
+                    <div className="w-[90%] bg-[#0353a4] flex justify-center mt-[30px] rounded-[5px] py-[5px] mb-[20px]"><p className="text-white text-[20px] font-medium">Fashion</p></div>
+                    <div className="flex items-center space-x-8 justify-center">
                         {
                             Products.map((product, index) => {
                                 if(product.type === "fashion"){
@@ -61,7 +64,9 @@ const Homepage = (props) => {
                             })
                         }
                     </div>
-                    <div className="">
+
+                    <div className="w-[90%] bg-[#0353a4] flex justify-center mt-[30px] rounded-[5px] py-[5px] mb-[20px]"><p className="text-white text-[20px] font-medium">Food</p></div>
+                    <div className="flex items-center space-x-8 justify-center">
                         {
                             Products.map((product, index) => {
                                 if(product.type === "food"){
@@ -70,7 +75,9 @@ const Homepage = (props) => {
                             })
                         }
                     </div>
-                    <div>
+
+                    <div className="w-[90%] bg-[#0353a4] flex justify-center mt-[30px] rounded-[5px] py-[5px] mb-[20px]"><p className="text-white text-[20px] font-medium">Shoes</p></div>
+                    <div className="flex items-center space-x-8 justify-center">
                         {
                             Products.map((product, index) => {
                                 if(product.type === "shoes"){

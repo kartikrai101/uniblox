@@ -49,7 +49,26 @@ const Header = ({page}) => {
                                 <img src="/assets/profile.png" className="w-[50px] hover:cursor-pointer" alt="profile" />
                             </div>
                         </div>
-                    ) : (null)
+                    ) : (
+                        page === "cart" ? (
+                            <div className="w-full border-[2px] border-grey px-[40px] bg-white py-[15px] flex items-center justify-between">
+                                <Link to={'/'}><div className=" flex items-center space-x-3 hover:cursor-pointer">
+                                    <img src="/assets/Logo.png" alt="logo" className="w-[45px] h-[45px]" />
+                                    <div className="space-y-[-10px]">
+                                        <p className="text-[32px] font-medium">UniShop</p>
+                                        <p className="italic">Get rewards on your shopping</p>
+                                    </div>
+                                </div></Link>
+                                <div className="space-x-10 flex items-center">
+                                    {/* <div className="flex items-center space-x-2 hover:cursor-pointer">
+                                        <img src="/assets/shopping-cart.png" className="w-[30px]" alt="profile" />
+                                        <p className="font-medium">Cart</p>
+                                    </div> */}
+                                    <img src="/assets/profile.png" className="w-[50px] hover:cursor-pointer" alt="profile" />
+                                </div>
+                            </div>
+                        ) : null
+                    )
                 ))
             }
         </>

@@ -1,5 +1,6 @@
 const Products = [
-    {
+    {   
+        id: "djlfnas",
         name: "Monitor",
         shortDescription: "Lenovo 31.5 inch Full HD",
         description: "Lenovo 31.5 inch Full HD VA Panel Monitor (D32-40)  (Response Time: 4 ms, 60 Hz Refresh Rate)",
@@ -106,52 +107,52 @@ const Products = [
         prevMonth: "1178",
         deliveredIn: "14",
     },
-    {
-        name: "Watch",
-        shortDescription: "Vintage Digital CASIO Watch",
-        description: "Vintage ( A-158WA-1Q ) Digital Watch - For Men & Women D011",
-        type: "electronics",
-        imgUrl: "https://rukminim2.flixcart.com/image/832/832/xif0q/watch/5/n/d/-original-imagqcq28apggqzx.jpeg?q=70",
-        price: 1695,
-        specs: [
-            {
-                key: "Model Name",
-                value: "D011"
-            },
-            {
-                key: "Color",
-                value: "Grey"
-            },
-            {
-                key: "Water Resistant",
-                value: "Yes"
-            },
-            {
-                key: "Display Type",
-                value: "Digital"
-            },
-            {
-                key: "Series",
-                value: "Vintage ( A-158WA-1Q )"
-            },
-            {
-                key: "Occasion",
-                value: "Casual"
-            },
-            {
-                key: "Watch Type",
-                value: "Metallic, Thick Straps"
-            },
-            {
-                key: "ales Package",
-                value: "1 Box, 1 Watch, 1 Warranty Card With Serial Number, 1 Warranty Term Sheet, 1 User Manual"
-            }
-        ],
-        rating: "4.8",
-        reviews: "9,837",
-        prevMonth: "4123",
-        deliveredIn: "3",
-    },
+    // {
+    //     name: "Watch",
+    //     shortDescription: "Vintage Digital CASIO Watch",
+    //     description: "Vintage ( A-158WA-1Q ) Digital Watch - For Men & Women D011",
+    //     type: "electronics",
+    //     imgUrl: "https://rukminim2.flixcart.com/image/832/832/xif0q/watch/5/n/d/-original-imagqcq28apggqzx.jpeg?q=70",
+    //     price: 1695,
+    //     specs: [
+    //         {
+    //             key: "Model Name",
+    //             value: "D011"
+    //         },
+    //         {
+    //             key: "Color",
+    //             value: "Grey"
+    //         },
+    //         {
+    //             key: "Water Resistant",
+    //             value: "Yes"
+    //         },
+    //         {
+    //             key: "Display Type",
+    //             value: "Digital"
+    //         },
+    //         {
+    //             key: "Series",
+    //             value: "Vintage ( A-158WA-1Q )"
+    //         },
+    //         {
+    //             key: "Occasion",
+    //             value: "Casual"
+    //         },
+    //         {
+    //             key: "Watch Type",
+    //             value: "Metallic, Thick Straps"
+    //         },
+    //         {
+    //             key: "ales Package",
+    //             value: "1 Box, 1 Watch, 1 Warranty Card With Serial Number, 1 Warranty Term Sheet, 1 User Manual"
+    //         }
+    //     ],
+    //     rating: "4.8",
+    //     reviews: "9,837",
+    //     prevMonth: "4123",
+    //     deliveredIn: "3",
+    // },
     {
         name: "Mobile",
         shortDescription: "OPPO Reno10 5G",
@@ -305,52 +306,52 @@ const Products = [
         prevMonth: "2671",
         deliveredIn: "7",
     },
-    {
-        name: "Monitor",
-        shortDescription: "Lenovo 31.5 inch Full HD VA Panel Monitor (D32-40)  (Response Time: 4 ms, 60 Hz Refresh Rate)",
-        description: "",
-        type: "electronics",
-        price: 14199,
-        imgUrl: "https://rukminim2.flixcart.com/image/832/832/ksc46fk0/monitor/b/y/l/m27f-2h0n1aa-acj-hp-original-imag5x3znkjbchwt.jpeg?q=70",
-        specs: [
-            {
-                key: "Model Name",
-                value: "D32-40"
-            },
-            {
-                key: "Color",
-                value: "Black"
-            },
-            {
-                key: "Display",
-                value: "80.01 cm (31.5 inch) LED Display"
-            },
-            {
-                key: "Panel Type",
-                value: "VA Panel"
-            },
-            {
-                key: "Screen Resolution Type",
-                value: "Full HD"
-            },
-            {
-                key: "Part Number",
-                value: "66FCGAC2IN"
-            },
-            {
-                key: "Sales Package",
-                value: "1 Monitor, User Manual Guide, Warranty Card"
-            },
-            {
-                key: "Screen Form Factor",
-                value: "Flat"
-            }
-        ],
-        rating: "4.3",
-        reviews: "130",
-        prevMonth: "2671",
-        deliveredIn: "7",
-    },
+    // {
+    //     name: "Monitor",
+    //     shortDescription: "Lenovo 31.5 inch Full HD VA Panel Monitor (D32-40)  (Response Time: 4 ms, 60 Hz Refresh Rate)",
+    //     description: "",
+    //     type: "electronics",
+    //     price: 14199,
+    //     imgUrl: "https://rukminim2.flixcart.com/image/832/832/ksc46fk0/monitor/b/y/l/m27f-2h0n1aa-acj-hp-original-imag5x3znkjbchwt.jpeg?q=70",
+    //     specs: [
+    //         {
+    //             key: "Model Name",
+    //             value: "D32-40"
+    //         },
+    //         {
+    //             key: "Color",
+    //             value: "Black"
+    //         },
+    //         {
+    //             key: "Display",
+    //             value: "80.01 cm (31.5 inch) LED Display"
+    //         },
+    //         {
+    //             key: "Panel Type",
+    //             value: "VA Panel"
+    //         },
+    //         {
+    //             key: "Screen Resolution Type",
+    //             value: "Full HD"
+    //         },
+    //         {
+    //             key: "Part Number",
+    //             value: "66FCGAC2IN"
+    //         },
+    //         {
+    //             key: "Sales Package",
+    //             value: "1 Monitor, User Manual Guide, Warranty Card"
+    //         },
+    //         {
+    //             key: "Screen Form Factor",
+    //             value: "Flat"
+    //         }
+    //     ],
+    //     rating: "4.3",
+    //     reviews: "130",
+    //     prevMonth: "2671",
+    //     deliveredIn: "7",
+    // },
 
     // fashion products
     {

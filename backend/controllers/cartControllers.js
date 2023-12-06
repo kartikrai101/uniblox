@@ -1,5 +1,8 @@
 const Cart = require('../database/models/cartModel');
 const { v4: uuidv4 } = require('uuid');
+const Coupon = require('../database/models/couponModel');
+const Order = require('../database/models/orderModel');
+const Customer = require('../database/models/customerModel');
 
 exports.addToCart = async (req, res) => {
     try{
@@ -79,11 +82,116 @@ exports.viewCart = async (req, res) => {
     }
 }
 
+exports.verifyCoupon = async (req, res) => {
+    try{
+        const userId = req.user.userId;
+        const couponCode = req.body.couponCode;
+
+        // check if this coupon code is valid
+        const response = await Coupon.findOne({
+            where : {
+                name: couponCode,
+                userId: userId
+            }
+        })
+
+        if(response === null){
+            res.json({
+                success: false,
+                message: "invalid coupon code!"
+            })
+            return 0;
+        }
+
+        // now that the coupon has been applied, remove it from the coupon table
+        const removeCoupon = await Coupon.destroy({
+            where: {
+                name: couponCode,
+                userId: userId
+            }
+        })
+
+        res.json({
+            success: true,
+            message: "coupon verified and removed from the list!",
+            body: response
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            message: "could not verify the coupon"
+        })
+    }
+}
+
 exports.placeOrder = async (req, res) => {
     try{
         const userId = req.user.userId;
         const orderId = uuidv4();
+        const couponApplied = req.body.couponApplied;
 
+        // fetch all the products from the user's cart and add their price
+
+        const cartItems = await Cart.findAll({
+            where: {userId: userId}
+        })
+
+        let totalAmount=0;
+        for(let item of cartItems){
+            totalAmount += item.price;
+        }
+        const currentDate = new Date().toDateString();
+
+        let discountPrice=0;
+        let newPrice = totalAmount;
+
+        // check if the coupon code entered by the user is valid
+        if(couponApplied){
+            // since the coupon has been applied, you need to give a 10% discount on the total price
+            discountPrice = totalAmount*0.1;
+            newPrice = totalAmount-discountPrice;
+        }
+        
+        const newOrder = await Order.create({
+            orderId: orderId,
+            userId: userId,
+            originalPrice: totalAmount,
+            discountPrice: discountPrice,
+            orderPrice: newPrice,
+            orderedOn: currentDate
+        })
+
+        // increment the order count in the customer table by one
+        const customerData = await Customer.findOne({
+            where: {
+                userId: userId
+            }
+        })
+        const orderCount = customerData.orderCount;
+        const newCouponId = uuidv4();
+        if((orderCount+1) % 5 === 0){
+            // means that we need to add another coupon to the coupon table for this user
+            const newCoupon = await Coupon.create({
+                couponId: newCouponId,
+                name: newCouponId.substring(0, 6),
+                userId: userId
+            })
+        }
+
+        const updateOrderCount = await Customer.update({
+            orderCount: orderCount + 1
+        },{
+            where: {
+                userId: userId
+            }
+        })
+
+        res.json({
+            success: true,
+            message: "order successfully placed!",
+            body: newOrder
+        })
+        
     }catch(err){
         res.json({
             success: false,

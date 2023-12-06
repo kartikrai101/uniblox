@@ -13,18 +13,20 @@ Order.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    totalAmount: {
-        type: DataTypes.INTEGER
+    originalPrice: {
+        type: DataTypes.DOUBLE
+    },
+    discountPrice: {
+        type: DataTypes.DOUBLE,
+    },
+    orderPrice: {
+        type: DataTypes.DOUBLE
     },
     orderedOn: {
         type: DataTypes.DATE
     },
     deliveredOn: {
         type: DataTypes.DATE 
-    },
-    discountAmount: {
-        type: DataTypes.NUMBER,
-        defaultValue:0
     }
 }, {
   sequelize,

@@ -49,7 +49,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="https://github.com/kartikrai101/uniblox/blob/main/README.md#unishop" alt="screenshot" />
+<img src="https://res.cloudinary.com/kartik09/image/upload/v1701902135/Screenshot_2023-12-07_at_4.04.28_AM_k0k9w8.png" alt="screenshot" />
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.

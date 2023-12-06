@@ -1,7 +1,9 @@
 const sequelize = require("../connection");
-const {DataTypes} = require('Sequelize')
+const {DataTypes, Model} = require('Sequelize')
 
-const Coupon = sequelize.define('coupons', {
+class Coupon extends Model {}
+
+Coupon.init({
     couponId: {
         type: DataTypes.STRING,
         primaryKey: true,
@@ -15,8 +17,9 @@ const Coupon = sequelize.define('coupons', {
         type: DataTypes.STRING
     }
 }, {
-    freezeTableName: true
+    sequelize,
+    modelName: 'coupon',
+    timestamps: false,
 });
 
-Coupon.sync({alter: true});
 module.exports = Coupon;

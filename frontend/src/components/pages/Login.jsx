@@ -23,16 +23,16 @@ const Login = (props) => {
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if(password.length < 6){
-            setPassword(false);
-            return 0;
-        }
         if(!emailRegex.test(email)){
             setEmail(false);
             return 0;
         }
+        if(password.length < 6){
+            setPassword(false);
+            return 0;
+        }
 
-        const url = "http://localhost:8000/api/hospital/login";
+        const url = "http://localhost:8000/user/login";
         const data = {
             email: email,
             password: password
@@ -48,7 +48,11 @@ const Login = (props) => {
         if(response.data.success === false){
             console.log(response.data.message)
         }else{
-            navigate('/hospital/dashboard')
+            console.log("User logged in successfully!")
+            console.log("Access token: ", response.data.access_token)
+            console.log("Refresh token: ", response.data.refresh_token)
+            localStorage.setItem("token", response.data.access_token)
+            navigate(`/unishop/home/${response.data.userId}`)
         }
     }
 

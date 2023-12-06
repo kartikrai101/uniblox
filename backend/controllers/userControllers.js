@@ -75,7 +75,8 @@ exports.login = async (req, res) => {
                 success: true,
                 message: "user successfully logged in!",
                 access_token: access_token,
-                refresh_token: refresh_token
+                refresh_token: refresh_token,
+                userId: emailCheck.userId
             })
         }else{
             res.json({
@@ -105,7 +106,9 @@ async function generateAccessToken(user){
 exports.authenticateUser = async (req, res, next) => {
     // extract the access token from the request header
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = req.headers.authorization;
+
+    console.log(token)
 
     if(token === null) return res.json({success: false, message: "Access token not found!"})
 

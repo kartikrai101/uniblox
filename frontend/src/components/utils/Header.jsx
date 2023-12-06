@@ -42,10 +42,10 @@ const Header = ({page}) => {
                                 </div>
                             </div></Link>
                             <div className="space-x-10 flex items-center">
-                                <div className="flex items-center space-x-2 hover:cursor-pointer">
+                                <Link to={'/cart'}><div className="flex items-center space-x-2 hover:cursor-pointer">
                                     <img src="/assets/shopping-cart.png" className="w-[30px]" alt="profile" />
                                     <p className="font-medium">Cart</p>
-                                </div>
+                                </div></Link>
                                 <img src="/assets/profile.png" className="w-[50px] hover:cursor-pointer" alt="profile" />
                             </div>
                         </div>
@@ -60,10 +60,6 @@ const Header = ({page}) => {
                                     </div>
                                 </div></Link>
                                 <div className="space-x-10 flex items-center">
-                                    {/* <div className="flex items-center space-x-2 hover:cursor-pointer">
-                                        <img src="/assets/shopping-cart.png" className="w-[30px]" alt="profile" />
-                                        <p className="font-medium">Cart</p>
-                                    </div> */}
                                     <img src="/assets/profile.png" className="w-[50px] hover:cursor-pointer" alt="profile" />
                                 </div>
                             </div>

@@ -200,3 +200,25 @@ exports.placeOrder = async (req, res) => {
         })
     }
 }
+
+exports.getCoupons = async (req, res) => {
+    try{
+        const userId=req.user.userId;
+        const response = await Coupon.findAll({
+            where: {
+                userId: userId
+            }
+        })
+
+        res.json({
+            success: true,
+            message: "fetched all the coupons successfully!",
+            body: response
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            message: "could not fetch coupons"
+        })
+    }
+}

@@ -4,69 +4,25 @@ import {Link, useParams} from 'react-router-dom';
 import Footer from '../utils/Footer';
 import Header from '../utils/Header';
 
-const product = {   
-    id: "djlfnas",
-    name: "Monitor",
-    shortDescription: "Lenovo 31.5 inch Full HD",
-    description: "Lenovo 31.5 inch Full HD VA Panel Monitor (D32-40)  (Response Time: 4 ms, 60 Hz Refresh Rate)",
-    type: "electronics",
-    imgUrl: "https://rukminim2.flixcart.com/image/832/832/xif0q/monitor/l/8/z/-original-imagtthycycfrpnf.jpeg?q=70",
-    price: 14199,
-    specs: [
-        {
-            key: "Model Name",
-            value: "D32-40"
-        },
-        {
-            key: "Color",
-            value: "Black"
-        },
-        {
-            key: "Display",
-            value: "80.01 cm (31.5 inch) LED Display"
-        },
-        {
-            key: "Panel Type",
-            value: "VA Panel"
-        },
-        {
-            key: "Screen Resolution Type",
-            value: "Full HD"
-        },
-        {
-            key: "Part Number",
-            value: "66FCGAC2IN"
-        },
-        {
-            key: "Sales Package",
-            value: "1 Monitor, User Manual Guide, Warranty Card"
-        },
-        {
-            key: "Screen Form Factor",
-            value: "Flat"
-        }
-    ],
-    rating: "4.3",
-    reviews: "130",
-    prevMonth: "2671",
-    deliveredIn: "7",
-}
-
 const ProductDetails = (props) => {
 
     const [productDetails, setProductDetails] = useState({});
+    const [token, setToken] = useState();
     const params = useParams();
 
 
     useEffect(() => {
         //fetch the id in parameter and get the product details
         const productId = params.id;
+        const token = localStorage.getItem("token");
+        setToken(token);
         const callback = async () => {
             const url = `http://localhost:8000/product/get/${params.id}`;
             const config = {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 }
             }
 
@@ -75,7 +31,29 @@ const ProductDetails = (props) => {
         }
 
         callback();
-    }, [])
+    }, []);
+
+    async function addToCartHandler(){
+        console.log(token)
+        const url = 'http://localhost:8000/cart/add';
+        const config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }
+
+        const body = {
+            productId: params.id
+        }
+
+        const response = await axios.post(url, body, config);
+        console.log(response);
+        return 0;
+    }
+
+    
 
     return (
         <div>
@@ -84,7 +62,7 @@ const ProductDetails = (props) => {
                 <div className='w-[35%] rounded-[10px] border-grey border-[1px] p-[20px]'>
                     <img src={productDetails.imgUrl} className='' alt="item-image" />
                     <div className='w-full space-x-3 mt-[30px] flex items-center'>
-                        <button className='bg-[#f3722c] flex justify-center items-center w-[50%] py-[10px] rounded-[5px] hover:shadow-xl'><p className='text-white font-medium'>Add to Cart</p></button>
+                        <button onClick={() => addToCartHandler()} className='bg-[#f3722c] flex justify-center items-center w-[50%] py-[10px] rounded-[5px] hover:shadow-xl'><p className='text-white font-medium'>Add to Cart</p></button>
                         <button className='bg-[#023e8a] flex justify-center items-center w-[50%] py-[10px] rounded-[5px] hover:shadow-xl'><p className='text-white font-medium'>Buy Now</p></button>
                     </div>
                 </div>

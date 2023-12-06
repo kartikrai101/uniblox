@@ -42,9 +42,14 @@ const Register = (props) => {
             setMismatch(true);
             return 0;
         }
+        if(name === ""){
+            setName(false)
+            return;
+        }
 
-        const url = "http://localhost:8000/api/hospital/login";
+        const url = "http://localhost:8000/user/register";
         const data = {
+            name: name,
             email: email,
             password: password
         }
@@ -59,7 +64,8 @@ const Register = (props) => {
         if(response.data.success === false){
             console.log(response.data.message)
         }else{
-            navigate('/hospital/dashboard')
+            console.log("User registered successfully!")
+            navigate('/login')
         }
     }
 

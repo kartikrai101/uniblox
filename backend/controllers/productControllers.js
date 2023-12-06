@@ -1,5 +1,6 @@
 const Product = require('../database/models/productModel');
 const { v4: uuidv4 } = require('uuid');
+const Cart = require('../database/models/cartModel')
 
 exports.addProduct = async (req, res) => {
     try{
@@ -104,6 +105,44 @@ exports.getProduct = async (req, res) => {
         res.json({
             success: false,
             message: "could not fetch the product",
+            body: err
+        })
+    }
+}
+
+exports.getAllProductsOfUser = async (req, res) => {
+    try{
+        const userId = req.user.userId;
+
+        const response = await Cart.findAll({
+            where: {
+                userId: userId
+            }
+        })
+
+        // now find all the products that are present in this cartItems
+        let products = []
+        for(let item of response){
+            const productId = item.dataValues.productId
+            
+            const product = await Product.findOne({
+                where: {
+                    productId: productId
+                }
+            })
+            products.push(product)
+        }
+
+        res.json({
+            success: true,
+            message: "successfully fetched all items in cart for this user",
+            body: products
+        })
+
+    }catch(err){
+        res.json({
+            success: false,
+            message: "could not fetch products of user",
             body: err
         })
     }

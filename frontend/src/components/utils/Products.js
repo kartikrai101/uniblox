@@ -561,7 +561,7 @@ const Products = [
     {
         name: "Wallnuts",
         shortDescription: "3P Bakery Walnuts",
-        description: "3P Bakery Walnuts | Brown Broken walnut kernels loose for bakery items Walnuts  (6 kg)",
+        description: "3P Bakery Walnuts | Brown Broken walnut kernels loose for bakery items Walnuts (6 kg)",
         type: "food",
         price: 3500,
         imgUrl: "https://rukminim2.flixcart.com/image/832/832/kvpklu80/nut-dry-fruit/k/5/p/6-bakery-walnuts-brown-broken-walnut-kernels-loose-for-bakery-original-imag8jwubnuszmjf.jpeg?q=70",
@@ -603,7 +603,7 @@ const Products = [
     {
         name: "Cashews",
         shortDescription: "Cashews/Kaju",
-        description: "OPEN SECRET Premium Cashews/Kaju|100% Natural|Tasty, Crunchy| Immunity Boosting Nuts| Cashews  (1 kg)",
+        description: "OPEN SECRET Premium Cashews/Kaju|100% Natural|Tasty, Crunchy| Immunity Boosting Nuts| Cashews (1 kg)",
         type: "food",
         price: 719,
         imgUrl: "https://rukminim2.flixcart.com/image/832/832/xif0q/nut-dry-fruit/w/w/s/1-premium-cashews-kaju-100-natural-tasty-crunchy-immunity-original-imagrk5dua5g2e6x.jpeg?q=70",
@@ -815,7 +815,7 @@ const Products = [
     {
         name: "NB Shoes",
         shortDescription: "New Balance ",
-        description: "490 Running Shoes For Men  (White)",
+        description: "490 Running Shoes For Men (White)",
         type: "shoes",
         price: 2828,
         imgUrl: "https://rukminim2.flixcart.com/image/832/832/kxrvi4w0/shoe/c/4/7/8-m490nw6-8-5-new-balance-white-steel-original-imaga5zhvq35b5gj.jpeg?q=70",
@@ -857,7 +857,7 @@ const Products = [
     {
         name: "Asics Shoes",
         shortDescription: "ASICS",
-        description: "GEL-CHALLENGER 14 Tennis Shoes For Men  (White)",
+        description: "GEL-CHALLENGER 14 Tennis Shoes For Men (White)",
         type: "shoes",
         price: 4718,
         imgUrl: "https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/k/x/o/-original-imagszajawzhwchz.jpeg?q=70",

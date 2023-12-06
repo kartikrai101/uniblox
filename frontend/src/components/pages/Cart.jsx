@@ -15,6 +15,9 @@ const Cart = (props) => {
     const [couponApplied, setCouponApplied] = useState(false);
     const [orderSummary, setOrderSummary] = useState({})
 
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         setToken(token);
@@ -96,7 +99,9 @@ const Cart = (props) => {
 
         const response = await axios.post(url, body, config);
 
-        console.log(response);
+        if(response.data.success){
+            navigate('/thank')
+        }
         return 0;
 
     }

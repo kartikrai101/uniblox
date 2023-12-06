@@ -12,10 +12,12 @@ const Register = (props) => {
     const idRef = useRef();
     const passwordRef = useRef();
     const confirmPassRef = useRef();
+    const nameRef = useRef();
 
     const [password, setPassword] = useState(true);
     const [confirmPassword, setConfirmPassword] = useState(true);
     const [email, setEmail] = useState(true);
+    const [name, setName] = useState(true);
     const [mismatch, setMismatch] = useState(false);
 
     const navigate = useNavigate();
@@ -24,6 +26,7 @@ const Register = (props) => {
         const email = idRef.current.value;
         const password = passwordRef.current.value;
         const confPass = confirmPassRef.current.value;
+        const name = nameRef.current.value;
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -69,6 +72,9 @@ const Register = (props) => {
                 <div className="flex flex-col justify-center items-center">
                     <p className="text-[42px] font-medium">Sign Up</p>
                     <div className="space-y-10 mt-[20px]">
+                        <div className="">
+                            <input onChange={() => setName(true)} ref ={nameRef} type="text" placeholder="Name" className={name ? normalClass : wrongClass} />
+                        </div>
                         <div className="">
                             <input onChange={() => setEmail(true)} ref ={idRef} type="text" placeholder="Email address" className={email ? normalClass : wrongClass} />
                         </div>

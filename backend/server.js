@@ -3,8 +3,12 @@ const app = express();
 require('dotenv').config();
 const sequelize = require('./database/connection')
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 app.use(bodyParser.json())
+app.use(cors({
+    origin: '*'
+}))
 
 sequelize.sync().then(() => console.log("Database is ready!"))
 

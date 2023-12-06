@@ -1,7 +1,9 @@
 const sequelize = require("../connection");
-const {DataTypes} = require('Sequelize')
+const {DataTypes, Model} = require('Sequelize');
 
-const User = sequelize.define('users', {
+class Customer extends Model {}
+
+Customer.init({
     userId: {
         type: DataTypes.STRING,
         primaryKey: true,
@@ -10,9 +12,6 @@ const User = sequelize.define('users', {
     name: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    cart: {
-        type: DataTypes.ARRAY(DataTypes.STRING)
     },
     email: {
         type: DataTypes.STRING,
@@ -23,18 +22,17 @@ const User = sequelize.define('users', {
         allowNull: false
     },
     address: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        defaultValue: ""
     },
     orderCount: {
-        type: DataTypes.NUMBER
+        type: DataTypes.NUMBER,
+        defaultValue: 0
     },
-    coupons: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        defaultValue: []
-    }
 }, {
-    freezeTableName: true
-});
+  sequelize,
+  modelName: 'customer',
+  timestamps: false,
+})
 
-User.sync({alter: true});
-module.exports = User;
+module.exports = Customer;

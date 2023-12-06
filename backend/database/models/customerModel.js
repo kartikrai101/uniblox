@@ -28,7 +28,7 @@ Customer.init({
     orderCount: {
         type: DataTypes.NUMBER,
         defaultValue: 0
-    },
+    }
 }, {
   sequelize,
   modelName: 'customer',

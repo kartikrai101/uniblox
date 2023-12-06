@@ -10,8 +10,10 @@ sequelize.sync().then(() => console.log("Database is ready!"))
 
 // route imports
 const userRoutes = require('./routes/userRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 app.use('/user', userRoutes);
+app.use('/cart', cartRoutes);
 
 app.listen(8000, () => {
     console.log("Running the server on port " + process.env.PORT);

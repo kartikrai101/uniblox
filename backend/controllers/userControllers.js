@@ -62,7 +62,8 @@ exports.login = async (req, res) => {
             // password and email both are verified, so create an access token and send that to the frontend
             const userData = {
                 email: email,
-                name: emailCheck.name
+                name: emailCheck.name,
+                userId: emailCheck.userId
             }
 
             const access_token = await generateAccessToken(userData);
@@ -103,13 +104,13 @@ async function generateAccessToken(user){
 // ----------------------- middlewares ------------------------------------
 exports.authenticateUser = async (req, res, next) => {
     // extract the access token from the request header
-    const authHeader = req.headers['authorization']
+    const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    if(token === null) return res.status(403).json({success: false, message: "Access token not found!"})
+    if(token === null) return res.json({success: false, message: "Access token not found!"})
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if(err){ return res.status(403).json({success: false, err})}
+        if(err){ return res.json({success: false, err})}
         
         req.user = user;
         next();

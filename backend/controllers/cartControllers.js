@@ -85,12 +85,14 @@ exports.viewCart = async (req, res) => {
 exports.verifyCoupon = async (req, res) => {
     try{
         const userId = req.user.userId;
-        const couponCode = req.body.couponCode;
+        const couponId = req.body.couponId;
+        const totalPrice = req.body.totalPrice;
+
 
         // check if this coupon code is valid
         const response = await Coupon.findOne({
             where : {
-                name: couponCode,
+                couponId: couponId,
                 userId: userId
             }
         })
@@ -106,15 +108,21 @@ exports.verifyCoupon = async (req, res) => {
         // now that the coupon has been applied, remove it from the coupon table
         const removeCoupon = await Coupon.destroy({
             where: {
-                name: couponCode,
+                couponId: couponId,
                 userId: userId
             }
         })
 
+        const discountPrice = totalPrice*0.1;
+        const newPrice = totalPrice-discountPrice;
+
         res.json({
             success: true,
             message: "coupon verified and removed from the list!",
-            body: response
+            body: {
+                newPrice: newPrice,
+                discountPrice: discountPrice
+            },
         })
     }catch(err){
         res.json({

@@ -12,6 +12,8 @@ const Cart = (props) => {
     const addressRef1 = useRef();
     const addressRef2 = useRef();
     const [couponList, setCouponList] = useState([]);
+    const [couponApplied, setCouponApplied] = useState(false);
+    const [orderSummary, setOrderSummary] = useState({})
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -29,6 +31,16 @@ const Cart = (props) => {
 
 
             if(response.data.success){
+                const prodArr = response.data.body;
+                let sum = 0;
+                for(let prod of prodArr){
+                    sum += prod.price
+                }
+                setOrderSummary({
+                    totalPrice: sum,
+                    discountedPrice: 0,
+                    orderPrice: sum
+                })
                 setCartItems(response.data.body)
             }
 
@@ -67,6 +79,55 @@ const Cart = (props) => {
 
         setCouponList(response.data.body);
         return 0;
+    }
+
+    const placeOrderHandler = async () => {
+        const url = `http://localhost:8000/cart/order`;
+        const config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }
+        const body = {
+            couponApplied: couponApplied
+        }
+
+        const response = await axios.post(url, body, config);
+
+        console.log(response);
+        return 0;
+
+    }
+
+    const applyCouponHandler = async (id) => {
+        const url = `http://localhost:8000/cart/coupon/verify`;
+        const config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }
+        
+        const body = {
+            couponId: id,
+            totalPrice: orderSummary.totalPrice
+        }
+        console.log(body)
+        const totalPrice = orderSummary.totalPrice;
+
+        const response = await axios.post(url, body, config);
+
+        console.log(response)
+
+        setOrderSummary({
+            totalPrice: totalPrice,
+            discountedPrice: response.data.body.discountPrice,
+            orderPrice: response.data.body.newPrice
+        })
+        setCouponApplied(true);
     }
 
     return (
@@ -112,35 +173,61 @@ const Cart = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full shadow-lg px-[20px] py-[20px]">
-                        <p className="text-[#6c757d] font-bold">COUPONS</p>
-                        <div className="">
-                            <button onClick = {() => viewCouponsHandler()} className="bg-[#f3722c] text-center text-white font-medium px-[10px] py-[7px] w-full mt-[10px] rounded-[4px]">My Coupons</button>
-                        </div>
-                        <div className="mt-[10px]">
-                            {
-                                couponList.length === 0 ? (
-                                    <p className="text-center">:( Seems like you don't have any coupons yet! Shop more to get exciting coupons!</p>
-                                ) : (
-                                    <div className="grid grid-cols-3">
-                                        {
-                                            couponList.map((coupon, key) => {
-                                                return (
-                                                    <div className="border-[1px] border-grey flex justify-between w-full">
-                                                        
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                )
-                            }
-                        </div>
-                    </div>
+                    {
+                        couponApplied ? null : (
+                            <div className="w-full shadow-lg px-[20px] py-[20px]">
+                                <p className="text-[#6c757d] font-bold">COUPONS</p>
+                                <div className="">
+                                    <button onClick = {() => viewCouponsHandler()} className="bg-[#f3722c] text-center text-white font-medium px-[10px] py-[7px] w-full mt-[10px] rounded-[4px]">My Coupons</button>
+                                </div>
+                                <div className="mt-[10px]">
+                                    {
+                                        couponList.length === 0 ? (
+                                            <p className="text-center">:( Seems like you don't have any coupons yet! Shop more to get exciting coupons!</p>
+                                        ) : (
+                                            <div className="grid grid-cols-2 mt-[20px]">
+                                                {
+                                                    couponList.map((coupon, key) => {
+                                                        return (
+                                                            <div className="border-[1px] border-grey flex justify-between w-full px-[5px] py-[5px] space-x-3">
+                                                                <p className="rounded-[3px] w-full border-[1px] border-grey px-[6px] py-[3px]">{coupon.name}</p>
+                                                                <button onClick = {() => applyCouponHandler(coupon.couponId)} className="text-center px-[13px] py-[3px] rounded-[3px] bg-[#f3722c] text-white">APPLY</button>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
                 <div className="w-[35%] shadow-lg px-[20px] py-[20px] h-[100%] min-h-[120px]">
                     <p className="text-[#6c757d] font-bold">ORDER SUMMARY</p>
                     <hr />
+                    <div className="mt-[20px]">
+                        <div className="mt-[10px]">
+                            <p className="text-[18px]">Total Purchase:</p>
+                            <p className="font-bold text-[#d00000]">₹{orderSummary.totalPrice}</p>
+                        </div>
+                    </div>
+                    <div className="">
+                        <div className="mt-[10px]">
+                            <p className="text-[18px]">Discount Applied:</p>
+                            <p className="font-bold">₹{orderSummary.discountedPrice}</p>
+                        </div>
+                    </div>
+                    <div className="">
+                        <div className="mt-[10px]">
+                            <p className="text-[18px]">Overall Order Price:</p>
+                            <p className="font-bold text-[#2b9348]">₹{orderSummary.orderPrice}</p>
+                        </div>
+                    </div>
+                    <div className="mt-[20px]">
+                        <button onClick={() => placeOrderHandler()} className="font-medium text-white bg-[#023e8a] text-center w-full rounded-[5px] px-[10px] py-[6px]">Place Order</button>
+                    </div>
                 </div>
             </div>
             <Footer />

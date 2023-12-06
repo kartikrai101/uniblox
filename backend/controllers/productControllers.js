@@ -60,3 +60,51 @@ exports.removeProduct = async (req, res) => {
         })
     }
 }
+
+exports.getAllProducts = async (req, res) => {
+    try{
+        const products = await Product.findAll();
+
+        res.json({
+            success: true,
+            message: "successfully fetched all the products!",
+            body: products
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            message: "could not fetch all products",
+            body: err
+        })
+    }
+}
+
+exports.getProduct = async (req, res) => {
+    try{
+        const productId = req.params.id;
+        const product = await Product.findOne({
+            where: {
+                productId: productId
+            }
+        })
+
+        if(product=== null){
+            res.json({
+                success: false,
+                message: "product not found!"
+            })
+        }
+
+        res.json({
+            success: true,
+            message: "successfully fetched the product",
+            body: product
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            message: "could not fetch the product",
+            body: err
+        })
+    }
+}

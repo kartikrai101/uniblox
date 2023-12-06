@@ -1,7 +1,9 @@
 const sequelize = require("../connection");
-const {DataTypes} = require('Sequelize')
+const {DataTypes, Model} = require('Sequelize');
 
-const Product = sequelize.define('products', {
+class Product extends Model {}
+
+Product.init({
     productId: {
         type: DataTypes.STRING,
         primaryKey: true,
@@ -27,9 +29,7 @@ const Product = sequelize.define('products', {
         type: DataTypes.INTEGER
     },
     specs: {
-        type: DataTypes.ARRAY(DataTypes.JSON),
-        allowNull: true,
-        defaultValue: []
+        type: DataTypes.TEXT
     },
     rating: {
         type: DataTypes.STRING
@@ -44,8 +44,9 @@ const Product = sequelize.define('products', {
         type: DataTypes.STRING
     }
 }, {
-    freezeTableName: true
+    sequelize,
+    modelName: 'product',
+    timestamps: false,
 });
 
-Product.sync({alter: true});
 module.exports = Product;

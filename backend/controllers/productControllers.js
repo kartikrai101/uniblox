@@ -1,0 +1,62 @@
+const Product = require('../database/models/productModel');
+const { v4: uuidv4 } = require('uuid');
+
+exports.addProduct = async (req, res) => {
+    try{
+        // add a product 
+        const data = req.body;
+        const productId = uuidv4();
+
+        const product = {
+            productId: productId,
+            name: req.body.name,
+            shortDescription: req.body.shortDescription,
+            description: req.body.description,
+            type: req.body.type,
+            imgUrl: req.body.imgUrl,
+            price: req.body.price,
+            specs: req.body.specs,
+            rating: req.body.rating,
+            reviews: req.body.reviews,
+            prevMonth: req.body.prevMonth,
+            deliveredIn: req.body.deliveredIn
+        }
+
+        const newProduct = await Product.create(product);
+        res.json({
+            success: true,
+            message: "added new product successfully!",
+            body: newProduct
+        });
+    }catch(err){
+        res.json({
+            success: false,
+            message: "Could not add the product",
+            body: err
+        })
+    }
+}
+
+exports.removeProduct = async (req, res) => {
+    try{
+        // remove the product with that product id
+        const productId = req.body.productId;
+        const response = await Product.destroy({
+            where: {
+                productId: productId
+            }
+        })
+
+        res.json({
+            success: true,
+            message: "removed the product successfully!",
+            body: response
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            message: "could not remove the product",
+            body: err
+        })
+    }
+}
